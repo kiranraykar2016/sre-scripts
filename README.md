@@ -1,6 +1,6 @@
 # SRE & Production Support Automation Scripts
 
-Bash scripts built for real-world SRE and production support scenarios — covering log analysis, system resource monitoring, and service/API health checks. Developed based on hands-on experience supporting enterprise CPaaS platforms (WhatsApp, RCS, Voice, SMS) at scale.
+Bash scripts built for real-world SRE and production support scenarios — covering log analysis, system resource monitoring, service/API health checks, and safe log cleanup. [KEEP YOUR ORIGINAL ENDING OF THIS SENTENCE]
 
 ---
 
@@ -12,6 +12,7 @@ sre-scripts/
 ├── reporting/       whatsapp_delivery_failure_report.sh
 ├── monitoring/      disk_free_alert.sh, cpu_memory_check.sh,
 │                    multi_service_check.sh, api_check.sh
+├── maintenance/     cleanup.sh
 └── bash-learning/   log_error_check.sh
 ```
 
@@ -66,6 +67,18 @@ Monitors HTTP API endpoint health by validating status codes in real time.
 
 ---
 
+## 🧹 Maintenance (`maintenance/`)
+
+### `cleanup.sh`
+Finds old `.log` files and optionally deletes them. Safe by default.
+- Usage: `./maintenance/cleanup.sh [folder] [days] [dry|delete]` (defaults: `.`, `7`, `dry`)
+- Dry run is the default; only the exact word `delete` removes files
+- Dry run and delete use the same `find` search, so the preview matches what would be removed
+- Prints its settings first so a wrong folder is easy to spot
+- **Use case:** Routine log housekeeping to prevent disks filling up
+
+---
+
 ## 📚 Bash Learning (`bash-learning/`)
 
 Practice scripts written while building up core Bash skills (loops, functions, file checks).
@@ -83,7 +96,7 @@ Reads a list of log file paths from `files.txt` and reports the ERROR count for 
 ```bash
 git clone https://github.com/kiranraykar2016/sre-scripts.git
 cd sre-scripts
-chmod +x monitoring/*.sh log-analysis/*.sh reporting/*.sh
+chmod +x monitoring/*.sh log-analysis/*.sh reporting/*.sh maintenance/*.sh
 ./monitoring/disk_free_alert.sh
 ```
 
@@ -93,7 +106,7 @@ Run each script from the repository root. Check the comments at the top of a scr
 
 ## 🛠️ Tech Stack
 - Bash Scripting
-- Linux CLI: `grep`, `awk`, `sed`, `cut`, `sort`, `uniq`, `df`, `free`, `top`, `ps`, `curl`
+- Linux CLI: `grep`, `awk`, `sed`, `cut`, `sort`, `uniq`, `df`, `free`, `top`, `ps`, `curl`, `find`
 - `systemctl` for service management
 - Git & GitHub for version control
 
@@ -102,7 +115,7 @@ Run each script from the repository root. Check the comments at the top of a scr
 ---
 
 ## 👤 Author
-**Kiran Raykar**  
-Senior Technical Support Engineer | SRE Enthusiast  
-4+ years supporting enterprise CPaaS platforms at Route Mobile Limited  
+**Kiran Raykar**
+Senior Technical Support Engineer | SRE Enthusiast
+4+ years supporting enterprise CPaaS platforms at Route Mobile Limited
 [LinkedIn](https://linkedin.com/in/kiran-raykar) | [GitHub](https://github.com/kiranraykar2016)
